@@ -30,7 +30,7 @@ const mongoose = require('mongoose');
 // const Books = require('./models/books');
 
 const url = config.mongoUrl;
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(url, {useNewUrlParser: true});
 
 connect.then((db) =>{
   console.log("Connected Correctly to Server!");
