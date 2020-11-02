@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const Books = require('../models/books');
-const { json } = require('body-parser');
+
 const cors = require('./cors');
 
 const bookRouter = express.Router();
