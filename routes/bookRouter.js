@@ -30,7 +30,8 @@ bookRouter.route("/")
     });
 
 bookRouter.route('/:bookId')
-    .get((req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+    .get(cors.cors, (req, res, next) => {
         Books.findById(req.params.bookId)
             .then((book) => {
                 res.statusCode = 200;
@@ -54,7 +55,7 @@ bookRouter.route('/:bookId')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .delete((req, res, next) => {
+    .delete(cors.corsWithOptions, (req, res, next) => {
         Books.findByIdAndRemove(req.params.bookId)
             .then((resp) => {
                 res.statusCode = 200;

@@ -22,7 +22,7 @@ const bookSchema = new Schema({
         required: true
     },
     ISBN: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
