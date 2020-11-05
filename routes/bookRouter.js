@@ -40,11 +40,11 @@ bookRouter.route('/:bookId')
             }, (err) => next(err))
             .catch((err) => next(err))
     })
-    .post((req, res, next) => {
+    .post(cors.corsWithOptions, (req, res, next) => {
         res.statusCode = 403;
         res.end('POST Operation Not Supported');
     })
-    .put((req, res, next) => {
+    .put(cors.corsWithOptions, (req, res, next) => {
         Books.findByIdAndUpdate(req.params.bookId, {
             $set: req.body
         }, {new: true})
