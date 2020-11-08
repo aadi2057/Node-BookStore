@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "cd client/bookhub && yarn run build",
-    "install-client": "cd client/bookhub && yarn install",
+    "build": "cd client/bookhub && npm run build",
+    "install-client": "cd client/bookhub && npm install",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build"
   },
   "dependencies": {
