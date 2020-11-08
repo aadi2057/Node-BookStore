@@ -49,7 +49,7 @@ if(process.env.NODE_ENV === 'production') {
   app.use(express.static('client/bookhub/build'));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client/bookhub' + 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client/bookhub', 'build', 'index.html'));
   })
 } 
 // error handler
