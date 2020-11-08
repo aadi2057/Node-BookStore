@@ -1,37 +1,34 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-require('mongoose-type-email');
+// require('mongoose-type-email');
 
+var passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
     firstname: {
         type: String,
-        required: true
+        default: ''
     },
     lastname: {
         type: String,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true,
-        unique: true
+        default: ''
     },
     gender: {
         type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
+        default: ''
     },
     email: {
-        type: mongoose.SchemaTypes.Email,
-        required: true,
-        unique: true
+        type: String,
+        
+        // unique: true, 
+        
     }
 }, {
     timestamps: true
 });
 
+User.plugin(passportLocalMongoose);
+
 module.exports = mongoose.model('User', User);
+
+// mongoose.SchemaTypes.Email

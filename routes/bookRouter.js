@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const Books = require('../models/books');
 
 const cors = require('./cors');
+var authenticate = require('../authenticate');
 
 const bookRouter = express.Router();
 bookRouter.use(bodyParser.json());
@@ -19,7 +20,7 @@ bookRouter.route("/")
             }, (err) => next(err))
             .catch((err) => next(err));
     })
-    .post(cors.corsWithOptions, (req, res, next) => {
+    .post(authenticate.verifyUser, cors.corsWithOptions, (req, res, next) => {
         Books.create(req.body)
             .then((book) => {
                 res.statusCode = 200;
@@ -44,7 +45,7 @@ bookRouter.route('/:bookId')
         res.statusCode = 403;
         res.end('POST Operation Not Supported');
     })
-    .put(cors.corsWithOptions, (req, res, next) => {
+    .put(authenticate.verifyUser, cors.corsWithOptions, (req, res, next) => {
         Books.findByIdAndUpdate(req.params.bookId, {
             $set: req.body
         }, {new: true})
@@ -55,7 +56,7 @@ bookRouter.route('/:bookId')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .delete(cors.corsWithOptions, (req, res, next) => {
+    .delete(authenticate.verifyUser, cors.corsWithOptions, (req, res, next) => {
         Books.findByIdAndRemove(req.params.bookId)
             .then((resp) => {
                 res.statusCode = 200;
