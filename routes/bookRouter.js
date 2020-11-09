@@ -21,6 +21,7 @@ bookRouter.route("/")
             .catch((err) => next(err));
     })
     .post(authenticate.verifyUser, cors.corsWithOptions, (req, res, next) => {
+        console.log(req.signedCookies);
         Books.create(req.body)
             .then((book) => {
                 res.statusCode = 200;
